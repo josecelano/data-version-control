@@ -16,7 +16,7 @@ Happy coding!
 
 # Custom features for this fork
 
-This is a fork from a totorial example repo. I'm adding some new features like an script to classify images using the generated model.
+This is a fork from a tutorial example repo. I'm adding some new features like an script to classify images using the generated model.
 For more details read the original tutorial.
 
 * Tutorial: https://realpython.com/python-data-version-control/
