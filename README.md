@@ -64,3 +64,7 @@ Sample output for predict.py script:
 Predicting for image: " /home/josecelano/Documents/github/josecelano/data-version-control/data/raw/train/n03888257/n03888257_24024.JPEG "
 ['parachute']
 ```
+
+## New content
+
+- [Add remote storage using Azure Blog Storage](docs/azure-blob-storage.md)
