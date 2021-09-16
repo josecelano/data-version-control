@@ -25,7 +25,7 @@ For more details read the original tutorial.
 ## Install
 
 ```
-git clone https://github.com/YourUsername/data-version-control
+git clone git@github.com:josecelano/data-version-control.git
 cd data-version-control
 conda create --name dvc python=3.8.2 -y
 conda config --add channels conda-forge
