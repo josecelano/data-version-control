@@ -19,8 +19,8 @@ Happy coding!
 This is a fork from a totorial example repo. I'm adding some new features like an script to classify images using the generated model.
 For more details read the original tutorial.
 
-Tutorial: https://realpython.com/python-data-version-control/
-Original repo: https://github.com/realpython/data-version-control
+* Tutorial: https://realpython.com/python-data-version-control/
+* Original repo: https://github.com/realpython/data-version-control
 
 ## Install
 
