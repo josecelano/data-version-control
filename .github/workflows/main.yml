@@ -1,0 +1,66 @@
+name: Build the model
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        # To share shell profile between steps
+        # https://github.com/marketplace/actions/setup-miniconda#use-a-default-shell
+        shell: bash -l {0}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Debug info
+        run: which python
+
+      - name: Cache Conda
+        uses: actions/cache@v2
+        if: ${{ !env.ACT }} # It seems cache doesn't work locally using act. Error: Attempt 1 of 2 failed with error: Cache Service Url not found, unable to restore cache.
+        env:
+          # Increase this value to reset cache if environment.yml has not changed
+          CACHE_NUMBER: 0
+        with:
+          path: ~/conda_pkgs_dir
+          key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yml') }}
+
+      - name: Setup Conda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          miniconda-version: "latest"
+          auto-update-conda: false
+          python-version: '3.8'
+          activate-environment: dvc
+          environment-file: environment.yml
+          use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
+      - name: Conda info
+        run: conda info
+
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+
+      - name: Pull dataset from remote
+        env:
+          AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+        run: dvc pull --remote azure
+
+      - name: Prepare the dataset, train the model and evaluate the model
+        run: |
+          python src/prepare.py
+          python src/train.py
+          python src/evaluate.py
+
+      - name: Make some predictions using test (validation) images
+        run: |
+          python src/predict.py -i data/raw/val/n03888257/n03888257_12212.JPEG # parachute
+          python src/predict.py -i data/raw/val/n03445777/n03445777_8541.JPEG  # golf ball

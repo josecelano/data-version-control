@@ -1,0 +1,10 @@
+name: dvc
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - scikit-learn
+  - scikit-image
+  - pandas
+  - numpy
+  - dvc-azure

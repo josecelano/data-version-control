@@ -32,6 +32,12 @@ conda config --add channels conda-forge
 conda install dvc scikit-learn scikit-image pandas numpy
 ```
 
+Alternatively you can create the conda environment with:
+
+```
+conda env create --file environment.yml
+```
+
 ## Run
 
 ```
@@ -65,6 +71,33 @@ Predicting for image: " /home/josecelano/Documents/github/josecelano/data-versio
 ['parachute']
 ```
 
+## Run workflow locally
+
+We are using [act](https://github.com/nektos/act) to run GitHub Actions locally.
+
+```
+act -j build --secret-file .env
+```
+
+Don't forget to add your Azure Blog Storage credentials to pull images from remote DVC storage.
+
+## Run workflow on GitHub
+
+You need to add the secrets in `.env.ci` file:
+
+```
+AZURE_STORAGE_ACCOUNT='YOUR_STORAGE_ACCOUNT_NAME'
+AZURE_STORAGE_KEY='YOUR_STORAGE_KEY'
+```
+
 ## New content
 
-- [Add remote storage using Azure Blog Storage](docs/azure-blob-storage.md)
+* [Add remote storage using Azure Blog Storage](docs/azure-blob-storage.md)
+* Basic workflow: pull dataset, train the model, evaluate the model¡ and make some predictions.
+
+## TODO
+
+* Write article for basic workflow.
+* Cache for DVC cache? We have to pull the whole dataset on every pipeline.
+* Consider docker insted of conda setup? maybe faster?
+* Update README to use conda environment.yml for installation
