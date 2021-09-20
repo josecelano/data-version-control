@@ -16,13 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-      - name: Debug info
-        run: which python
-
       - name: Cache Conda
         uses: actions/cache@v2
         if: ${{ !env.ACT }} # It seems cache doesn't work locally using act. Error: Attempt 1 of 2 failed with error: Cache Service Url not found, unable to restore cache.
