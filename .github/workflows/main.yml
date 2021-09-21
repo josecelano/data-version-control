@@ -49,9 +49,11 @@ jobs:
 
       - name: Prepare the dataset, train the model and evaluate the model
         run: |
-          python src/prepare.py
-          python src/train.py
-          python src/evaluate.py
+          time python src/prepare.py
+          time python src/prepare_images.py
+          time python src/train.py
+          time python src/evaluate.py
+          cat metrics/accuracy.json
 
       - name: Make some predictions using test (validation) images
         run: |

@@ -4,12 +4,12 @@ from pathlib import Path
 
 from sklearn.metrics import accuracy_score
 
-from train import load_data
+from train import load_data_from_raw_images
 
 
 def main(repo_path):
     test_csv_path = repo_path / "data/prepared/test.csv"
-    test_data, labels = load_data(test_csv_path)
+    test_data, labels = load_data_from_raw_images(test_csv_path)
     model = load(repo_path / "model/model.joblib")
     predictions = model.predict(test_data)
     accuracy = accuracy_score(labels, predictions)

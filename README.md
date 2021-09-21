@@ -49,6 +49,13 @@ Generate csv files:
 python3 src/prepare.py
 ```
 
+Resize images to 100x100 and convert them to PNG format:
+```
+python3 src/prepare_images.py
+```
+The model can be trained with raw images or pre-processed images and use them. For the time being both options are hardcoded in train.py file.
+The default option is from raw images.
+
 Train the model:
 ```
 python3 src/train.py
@@ -56,7 +63,7 @@ python3 src/train.py
 
 Evaluate the model with the test set:
 ```
-python3 src/evaluate.py
+python3 src/evaluate.py && cat metrics/accuracy.json 
 ```
 
 User the model to classify the image:
@@ -70,6 +77,12 @@ Sample output for predict.py script:
 Predicting for image: " /home/josecelano/Documents/github/josecelano/data-version-control/data/raw/train/n03888257/n03888257_24024.JPEG "
 ['parachute']
 ```
+
+This could be a golden test if you change something:
+```
+python src/train.py && python src/evaluate.py && cat metrics/accuracy.json
+```
+Accuracy should be almost the same. The trainning process is not deterministic.
 
 ## Run workflow locally
 
@@ -105,12 +118,12 @@ AZURE_STORAGE_KEY='YOUR_STORAGE_KEY'
 
 ## New content
 
-* [Add remote storage using Azure Blog Storage](docs/azure-blob-storage.md)
+* [Add remote storage using Azure Blog Storage](docs/azure-blob-storage.md).
 * [Basic workflow: pull dataset, train the model, evaluate the model and make some predictions](docs/basic-workflow-with-dvc.md)
 
 ## TODO
 
-* Write article for basic workflow.
 * Cache for DVC cache? We have to pull the whole dataset on every pipeline.
-* Consider docker insted of conda setup? maybe faster?
-* Update README to use conda environment.yml for installation
+* Consider docker insted of conda setup? maybe faster?.
+* Write an article about `prepare_images.py` script.
+* Refactor `prepare_images.py` script. How could be easily converted to GitHub Action in the future.
