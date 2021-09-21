@@ -1,3 +1,5 @@
+[![Build the model](https://github.com/josecelano/data-version-control/actions/workflows/main.yml/badge.svg)](https://github.com/josecelano/data-version-control/actions/workflows/main.yml)
+
 # Data Version Control Tutorial
 
 Example repository for the [Data Version Control With Python and DVC](https://realpython.com/python-data-version-control/) article on [Real Python](https://realpython.com/).
