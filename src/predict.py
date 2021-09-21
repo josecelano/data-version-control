@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import numpy as np
 
-from train import load_data, preprocess
+from train import resize_and_reshape
 from skimage.io import imread
 
 import sys
@@ -34,7 +34,7 @@ def main(repo_path, argv):
 
         raw_image = imread(image_path)  
     
-        processed_image = [preprocess(raw_image)]
+        processed_image = [resize_and_reshape(raw_image)]
         data = np.concatenate(processed_image, axis=0)
 
         predictions = model.predict(data)
