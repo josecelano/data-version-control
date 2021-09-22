@@ -129,3 +129,5 @@ AZURE_STORAGE_KEY='YOUR_STORAGE_KEY'
 * Consider docker insted of conda setup? maybe faster?.
 * Write an article about `prepare_images.py` script.
 * Refactor `prepare_images.py` script. How could be easily converted to GitHub Action in the future.
+* Use GitHub cache for DVC local cache `.dvc\cache`?
+* It seems conda cache it's not working. See issue [#1](https://github.com/josecelano/data-version-control/issues/1)
