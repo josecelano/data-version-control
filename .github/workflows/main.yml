@@ -47,15 +47,19 @@ jobs:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
         run: dvc pull --remote azure
 
-      - name: Prepare the dataset, train the model and evaluate the model
-        run: |
-          time python src/prepare.py
-          time python src/prepare_images.py
-          time python src/train.py
-          time python src/evaluate.py
-          cat metrics/accuracy.json
+      - name: Prepare csv files
+        run: python src/prepare.py
 
-      - name: Make some predictions using test (validation) images
+      - name: Prepare images
+        run: time python src/prepare_images.py
+
+      - name: Train the model
+        run: python src/train.py
+
+      - name: Evaluate the model
+        run: python src/evaluate.py && cat metrics/accuracy.json          
+
+      - name: Make some predictions
         run: |
           python src/predict.py -i data/raw/val/n03888257/n03888257_12212.JPEG # parachute
           python src/predict.py -i data/raw/val/n03445777/n03445777_8541.JPEG  # golf ball
