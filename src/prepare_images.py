@@ -1,4 +1,4 @@
-# Resize iamges to 100x100 pixels. We also convert them to PNG otherwise we can loose information if we save them as JPG.
+# Resize images to 100x100 pixels. We also convert them to PNG otherwise we can loose information if we save them as JPG.
 # https://stackoverflow.com/questions/47361966/scikit-image-write-a-ndarray-to-image-with-imsave-read-back-with-imread-data
 
 import numpy as np
