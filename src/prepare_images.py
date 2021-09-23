@@ -39,8 +39,8 @@ def get_reshaped_image_path(reshaped_image_dir, image_file):
     return f'{reshaped_image_dir}/{image_file}'
 
 
-def prepare_train_images(train_csv_path):
-    df = pd.read_csv(train_csv_path)
+def prepare_images(csv_path):
+    df = pd.read_csv(csv_path)
     file_path_list = load_column(data_frame=df, column_name="filename")
 
     for image_path in file_path_list:
@@ -63,8 +63,13 @@ def prepare_train_images(train_csv_path):
 
 
 def main(repo_path):
+    # prepare train images
     train_csv_path = repo_path / "data/prepared/train.csv"
-    prepare_train_images(train_csv_path)
+    prepare_images(train_csv_path)
+
+    # prepare test images
+    test_csv_path = repo_path / "data/prepared/test.csv"
+    prepare_images(test_csv_path)
 
 
 def load_column(data_frame, column_name):
