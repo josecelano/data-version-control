@@ -134,4 +134,5 @@ AZURE_STORAGE_KEY='YOUR_STORAGE_KEY'
 * Write an article about `prepare_images.py` script.
 * Refactor `prepare_images.py` script. How could be easily converted to GitHub Action in the future.
 * Use GitHub cache for DVC local cache `.dvc\cache`?
-* It seems conda cache it's not working. See issue [#1](https://github.com/josecelano/data-version-control/issues/1)
+* It seems conda cache it's not working. See issue [#1](https://github.com/josecelano/data-version-control/issues/1).
+* Make the pipeline fail if the accuracy of the model decreases.
