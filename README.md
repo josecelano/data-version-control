@@ -56,7 +56,7 @@ Resize images to 100x100 and convert them to PNG format:
 python3 src/prepare_images.py
 ```
 The model can be trained with raw images or pre-processed images and use them. For the time being both options are hardcoded in train.py file.
-The default option is from raw images.
+The default option is from pre-resized images.
 
 Train the model:
 ```

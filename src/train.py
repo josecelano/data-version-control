@@ -5,7 +5,7 @@ import os
 from joblib import dump
 from pathlib import Path
 from skimage.io import imread_collection, imsave, imread
-from skimage import img_as_ubyte
+from skimage import img_as_float64
 from skimage.transform import resize
 from sklearn.ensemble import RandomForestClassifier
 
@@ -23,8 +23,7 @@ def load_resized_images(data_frame, column_name):
     filelist = data_frame[column_name].to_list()
 
     # get the prepared image list
-    filelist = [get_resized_image_path_from(
-        raw_image_path) for raw_image_path in filelist]
+    filelist = [get_resized_image_path_from(raw_image_path) for raw_image_path in filelist]
 
     image_list = imread_collection(filelist)
 
@@ -40,6 +39,10 @@ def resize_and_reshape(image):
     return im_reshape(im_resize(image))
 
 
+def convert_to_float64_and_reshape(image):
+    return im_reshape(img_as_float64(image))
+
+
 def im_resize(image):
     # resize doc: https://scikit-image.org/docs/stable/api/skimage.transform.html?highlight=resize#resize
     return resize(image, (100, 100, 3))
@@ -51,13 +54,15 @@ def im_reshape(image):
 
 
 def get_resized_image_path_from(raw_image_path):
-    image_file = os.path.basename(raw_image_path)
+    raw_image_file = os.path.basename(raw_image_path)
+    p = Path(raw_image_file)
+    image_file_name = p.stem
+    ext = 'png'
+    image_file = f'{image_file_name}.{ext}'
     object_type = parse_object_type_from_image_path(raw_image_path)
     object_purpose = parse_object_purpose_from_image_path(raw_image_path)
     resized_image_dir = get_resized_image_dir(object_purpose, object_type)
-    resized_image_relative_path = get_resized_image_path(
-        resized_image_dir, image_file)
-    #resized_image_path = f'/home/josecelano/Documents/github/josecelano/data-version-control/{resized_image_relative_path}'
+    resized_image_relative_path = get_resized_image_path(resized_image_dir, image_file)
     return resized_image_relative_path
 
 
@@ -82,7 +87,7 @@ def load_data_from_resized_images(data_path):
 
     # load resized images and only reshape them
     resized_images = load_resized_images(data_frame=df, column_name="filename")
-    processed_images = [im_reshape(image) for image in resized_images]
+    processed_images = [convert_to_float64_and_reshape(image) for image in resized_images]
 
     data = np.concatenate(processed_images, axis=0)
 
@@ -93,11 +98,11 @@ def main(repo_path):
     train_csv_path = repo_path / "data/prepared/train.csv"
 
     # training using raw images
-    train_data, labels = load_data_from_raw_images(train_csv_path)
+    #train_data, labels = load_data_from_raw_images(train_csv_path)
 
     # training using preprocessed images (resized images)
-    # uncomment this line to use preprocessed images
-    #train_data, labels = load_data_from_resized_images(train_csv_path)
+    # uncomment this line to use resized images
+    train_data, labels = load_data_from_resized_images(train_csv_path)
 
     # RandomForestClassifier: https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn-ensemble-randomforestclassifier
     rf = RandomForestClassifier()
