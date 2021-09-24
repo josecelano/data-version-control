@@ -7,7 +7,7 @@ from skimage.io import imread, imsave
 from skimage.transform import resize
 
 # sample usage:
-# python src/actions/resize_image.py -i src/scripts/data/bridge.jpeg -o bridge2.jpeg -r 200 -c 200 -d 3
+# python src/actions/resize_image/resize_image.py -i src/scripts/data/bridge.jpeg -o src/scripts/data/bridge-100x100.jpeg -r 100 -c 100 -d 3
 
 
 def create_dest_folder(resized_image_path):

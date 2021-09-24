@@ -1,0 +1,4 @@
+name: resize-image-action
+dependencies:
+  - python=3.8
+  - scikit-image

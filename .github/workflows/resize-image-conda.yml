@@ -1,0 +1,38 @@
+name: Resize image using conda
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  resize_with_conda:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}    
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Conda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          miniconda-version: "latest"
+          auto-update-conda: false
+          python-version: '3.8'
+          activate-environment: resize-image-action
+          environment-file: src/actions/resize_image/environment.yml
+      - name: Conda info
+        run: conda info
+
+      - name: Resize sample image
+        run: | 
+          python src/actions/resize_image/resize_image.py -i src/scripts/data/bridge.jpeg -o src/scripts/data/bridge-100x100.jpeg -r 100 -c 100 -d 3
+          ls -al ./src/scripts/data/bridge-100x100.jpeg
+
+      - name: Archive resized image
+        uses: actions/upload-artifact@v2
+        if: ${{ !env.ACT }}
+        with:
+          name: sample-resized-image
+          path: src/scripts/data/bridge-100x100.jpeg
