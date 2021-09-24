@@ -128,6 +128,10 @@ AZURE_STORAGE_KEY='YOUR_STORAGE_KEY'
 
 * [Random forest Algorithm](https://inblog.in/Random-forest-r7gFle7V8L)
 
+## Troubleshooting
+
+* [Troubleshooting](docs/troubleshooting.md)
+
 ## TODO
 
 * Cache for DVC cache? We have to pull the whole dataset on every pipeline.
