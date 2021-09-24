@@ -3,9 +3,7 @@ import pandas as pd
 import os
 
 from pathlib import Path
-from skimage.io import imsave, imread
-from skimage import img_as_ubyte
-from skimage.transform import resize
+from actions.resize_image import resize_image
 
 # From /home/josecelano/Documents/github/josecelano/data-version-control/data/raw/train/n03445777/n03445777_14165.JPEG
 # It returns: n03445777
@@ -52,14 +50,10 @@ def prepare_images(csv_path):
         object_folder = parse_object_type_from_image_path(image_path)
         train_or_val = parse_object_purpose_from_image_path(image_path)
 
-        image = imread(image_path)
-
-        resized = resize(image, (100, 100, 3))
         resized_image_dir = get_resized_image_dir(train_or_val, object_folder)
-        os.makedirs(resized_image_dir, exist_ok=True)
         resized_image_path = f'{resized_image_dir}/{image_file_name}.{ext}'
-        imsave(resized_image_path, img_as_ubyte(resized))
-        print(f'Resized image: {resized_image_path}')
+
+        resize_image(image_path, resized_image_path, (100, 100, 3))
 
 
 def main(repo_path):
