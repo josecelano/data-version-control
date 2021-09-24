@@ -131,9 +131,8 @@ AZURE_STORAGE_KEY='YOUR_STORAGE_KEY'
 ## TODO
 
 * Cache for DVC cache? We have to pull the whole dataset on every pipeline.
-* Consider docker insted of conda setup? maybe faster?.
-* Write an article about `prepare_images.py` script.
-* Refactor `prepare_images.py` script. How could be easily converted to GitHub Action in the future.
+* Consider docker instead of `conda` setup? maybe faster?.
+* Refactor `prepare_images.py` script. How could be easily converted to GitHub Action in the future?
 * Use GitHub cache for DVC local cache `.dvc\cache`?
-* It seems conda cache it's not working. See issue [#1](https://github.com/josecelano/data-version-control/issues/1).
+* It seems `conda` cache it's not working. See issue [#1](https://github.com/josecelano/data-version-control/issues/1).
 * Make the pipeline fail if the accuracy of the model decreases.
