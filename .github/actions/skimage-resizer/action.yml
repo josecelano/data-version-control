@@ -1,0 +1,23 @@
+name: "Skimage Resizer"
+description: "Image resizer using Python package scikit-image"
+author: "Jose Celano"
+inputs:
+  source_image_path:
+    description: "Source image path"
+    required: true
+  resized_image_path:
+    description: "Resized image path"
+    required: true
+  rows:
+    description: "Rows"
+    required: true
+  cols:
+    description: "Cols"
+    required: true
+  dim:
+    description: "Dim"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+

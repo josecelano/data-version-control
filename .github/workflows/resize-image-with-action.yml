@@ -1,0 +1,31 @@
+name: Resize image using GitHub Action
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  resize_with_github_action:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run action
+        uses: ./.github/actions/skimage-resizer
+        with:
+          source_image_path: ${{ github.workspace }}/src/scripts/data/bridge.jpeg
+          resized_image_path: ${{ github.workspace }}/src/scripts/data/bridge-100x100.jpeg
+          rows: 100
+          cols: 100
+          dim: 3
+
+      - name: Archive resized image
+        uses: actions/upload-artifact@v2
+        if: ${{ !env.ACT }}
+        with:
+          name: sample-resized-image
+          path: src/scripts/data/bridge-100x100.jpeg
