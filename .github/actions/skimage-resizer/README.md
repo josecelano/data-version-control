@@ -42,29 +42,31 @@ Build docker image:
 docker build -t skimage-resizer .
 ```
 
-Run it locally with docker:
+Run as GitHub action locally with docker:
 ```
 docker run -it \
-  --env INPUT_SOURCE_IMAGE_PATH=/github/workspace/src/scripts/data/bridge.jpeg \
-  --env INPUT_RESIZED_IMAGE_PATH=/github/workspace/src/scripts/data/bridge-100x100.jpeg \
+  --env INPUT_SOURCE_IMAGE_PATH=/github/workspace/src/tests/fixtures/bridge.jpeg \
+  --env INPUT_RESIZED_IMAGE_PATH=/github/workspace/src/tests/fixtures/bridge-100x100.jpeg \
   --env INPUT_ROWS=100 \
   --env INPUT_COLS=100 \
   --env INPUT_DIM=3 \
   --volume $(pwd):/github/workspace \
   skimage-resizer
 ```
-See: https://docs.github.com/en/actions/creating-actions/dockerfile-support-for-github-actions#workdir
 
-Run it locally without docker:
+Run as console app locally with docker:
 ```
-INPUT_SOURCE_IMAGE_PATH=src/scripts/data/bridge.jpeg \
-INPUT_RESIZED_IMAGE_PATH=src/scripts/data/bridge-100x100.jpeg \
-INPUT_ROWS=100 \
-INPUT_COLS=100 \
-INPUT_DIM=3 \
-python .github/actions/skimage-resizer/main.py
+docker run -it \
+  --volume $(pwd):/github/workspace \
+  skimage-resizer \
+  python /src/app/console/main.py \
+    --input /github/workspace/src/tests/fixtures/bridge.jpeg \
+    --output /github/workspace/src/tests/fixtures/bridge-100x100.jpeg \
+    -r 100 \
+    -c 100 \
+    -d 3
 ```
-You can use your pre-activated conda environment to run the script if the dependencies are the same.
+See: https://docs.github.com/en/actions/creating-actions/dockerfile-support-for-github-actions#workdir
 
 Run action using `act`:
 ```
