@@ -2,6 +2,8 @@
 
 [![Resize image using conda](https://github.com/josecelano/data-version-control/actions/workflows/resize-image-conda.yml/badge.svg)](https://github.com/josecelano/data-version-control/actions/workflows/resize-image-conda.yml)
 
+[![Resize image using GitHub Action](https://github.com/josecelano/data-version-control/actions/workflows/resize-image-with-action.yml/badge.svg)](https://github.com/josecelano/data-version-control/actions/workflows/resize-image-with-action.yml)
+
 # Data Version Control Tutorial
 
 Example repository for the [Data Version Control With Python and DVC](https://realpython.com/python-data-version-control/) article on [Real Python](https://realpython.com/).
