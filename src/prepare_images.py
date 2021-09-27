@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 from pathlib import Path
-from actions.resize_image import resize_image
+from actions.resize_image.resize_image import resize_image
 
 # From /home/josecelano/Documents/github/josecelano/data-version-control/data/raw/train/n03445777/n03445777_14165.JPEG
 # It returns: n03445777
