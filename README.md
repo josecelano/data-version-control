@@ -100,12 +100,14 @@ act -h
 ```
 
 Run workflow locally:
-```
+```shell
 act -j build --secret-file .env
+act -j show_changed_images --secret-file .env
+...
 ```
 With the `j` you can run only a single job.
 
-Don't forget to add your Azure Blog Storage credentials to pull images from remote DVC storage. Otherwise you will get this error:
+Don't forget to add your Azure Blog Storage credentials to pull images from remote DVC storage. Otherwise, you will get this error:
 
 ```
 | ERROR: failed to pull data from the cloud - Authentication to Azure Blob Storage requires either account_name or connection_string.
