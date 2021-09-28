@@ -132,6 +132,8 @@ AZURE_STORAGE_KEY='YOUR_STORAGE_KEY'
 ## Links
 
 * [Random forest Algorithm](https://inblog.in/Random-forest-r7gFle7V8L)
+* [Why you should use Alpine for docker images](https://blog.realkinetic.com/building-minimal-docker-containers-for-python-applications-37d0272c52f3)
+* [Why you should not use Alpine for docker images](https://pythonspeed.com/articles/alpine-docker-python/)
 
 ## Troubleshooting
 
@@ -140,8 +142,7 @@ AZURE_STORAGE_KEY='YOUR_STORAGE_KEY'
 ## TODO
 
 * Cache for DVC cache? We have to pull the whole dataset on every pipeline.
-* Consider docker instead of `conda` setup? maybe faster?.
-* Refactor `prepare_images.py` script. How could be easily converted to GitHub Action in the future?
 * Use GitHub cache for DVC local cache `.dvc\cache`?
 * It seems `conda` cache it's not working. See issue [#1](https://github.com/josecelano/data-version-control/issues/1).
 * Make the pipeline fail if the accuracy of the model decreases.
+* Add tests to GitHub Action skimage-resizer.
