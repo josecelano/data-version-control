@@ -127,6 +127,7 @@ AZURE_STORAGE_KEY='YOUR_STORAGE_KEY'
 * [Add remote storage using Azure Blog Storage](docs/azure-blob-storage.md).
 * [Basic workflow: pull dataset, train the model, evaluate the model and make some predictions](docs/basic-workflow-with-dvc.md)
 * [Preparing images for training](docs/preparing-images-for-training.md)
+* [GitHub Action: skimage-resizer](docs/github-action-skimage-resizer.md)
 
 ## Links
 
