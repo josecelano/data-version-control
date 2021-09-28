@@ -32,8 +32,8 @@ def main(repo_path, argv):
 
         print('Predicting for image: "', image_path, '"')
 
-        raw_image = imread(image_path)  
-    
+        raw_image = imread(image_path)
+
         processed_image = [resize_and_reshape(raw_image)]
         data = np.concatenate(processed_image, axis=0)
 

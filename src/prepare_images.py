@@ -8,6 +8,8 @@ from actions.resize_image.resize_image import resize_image
 # From /home/josecelano/Documents/github/josecelano/data-version-control/data/raw/train/n03445777/n03445777_14165.JPEG
 # It returns: n03445777
 # The folder containing the image
+
+
 def parse_object_type_from_image_path(image_path):
     return os.path.basename(os.path.dirname(image_path))  # Object type folder
 

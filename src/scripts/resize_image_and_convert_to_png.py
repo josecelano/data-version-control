@@ -26,7 +26,8 @@ resized = resize(original, (100, 100, 3))
 print(resized[0, 0], "Resized image", resized.dtype)
 ubyte_resized_image = img_as_ubyte(resized)
 imsave(otuput_resized_image_path, ubyte_resized_image)
-print(ubyte_resized_image[0, 0], "Resized image as ubyte", ubyte_resized_image.dtype)
+print(ubyte_resized_image[0, 0],
+      "Resized image as ubyte", ubyte_resized_image.dtype)
 
 # reload resized image
 resized_reloaded = imread(otuput_resized_image_path)
@@ -37,7 +38,8 @@ imsave(otuput_converted_image_path, ubyte_original)
 
 # reload converted image
 converted_reloaded = imread(otuput_converted_image_path)
-print(converted_reloaded[0, 0], "Reloaded converted image", converted_reloaded.dtype)
+print(converted_reloaded[0, 0],
+      "Reloaded converted image", converted_reloaded.dtype)
 
 
 """ Output
