@@ -1,0 +1,29 @@
+name: Extract changed images
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  show_changed_images:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        # To share shell profile between steps
+        # https://github.com/marketplace/actions/setup-miniconda#use-a-default-shell
+        shell: bash -l {0}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+
+      - name: Detect changed raw images
+        run: |
+          sudo apt-get -y install jq
+          # dvc diff --show-json a_rev b_rev | jq
+          # a_rev      Old Git commit to compare (defaults to HEAD)
+          # b_rev      New Git commit to compare (defaults to current workspace)
+          # dvc diff --show-json 7f43a8b HEAD | jq
+          dvc diff --show-json refs/heads/master ${{ github.ref }} | jq

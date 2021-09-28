@@ -50,6 +50,11 @@ jobs:
       - name: Prepare csv files
         run: python src/prepare.py
 
+      - name: Detect changed raw images
+        run: |
+          sudo apt-get install jq
+          dvc diff --show-json 7f43a8b HEAD | jq
+
       - name: Prepare images
         run: time python src/prepare_images.py
 
