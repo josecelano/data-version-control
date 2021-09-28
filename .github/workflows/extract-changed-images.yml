@@ -14,24 +14,34 @@ jobs:
         shell: bash -l {0}
 
     steps:
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
+      - name: Detect changed Git files
+        run: |
+          echo ${{ github.event.before }}
+          echo ${{ github.sha }}
+          echo "$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})"
+
       - name: Setup DVC
         uses: iterative/setup-dvc@v1
 
-      - name: Detect changed raw images
+      - name: Detect changed DVC files
+        id: diff
         env:
           AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}      
         run: |
-          # Git files changed
-          git diff --name-only refs/heads/master ${{ github.ref }}
-
           # DVC files changed
           # dvc diff --show-json a_rev b_rev | jq
           # a_rev      Old Git commit to compare (defaults to HEAD)
           # b_rev      New Git commit to compare (defaults to current workspace)
           # dvc diff --show-json 7f43a8b HEAD | jq
-          dvc diff --show-json refs/heads/master ${{ github.ref }} | jq
+          echo "::set-output name=diff::$(dvc diff --show-json ${{ github.event.before }} ${{ github.shaf }} | jq)"
