@@ -57,7 +57,7 @@ jobs:
         run: python src/train.py
 
       - name: Evaluate the model
-        run: python src/evaluate.py && cat metrics/accuracy.json          
+        run: python src/evaluate.py && cat metrics/accuracy.json&& python src/check_accuracy.py
 
       - name: Make some predictions
         run: |
