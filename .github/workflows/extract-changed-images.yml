@@ -15,13 +15,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Setup DVC
         uses: iterative/setup-dvc@v1
 
       - name: Detect changed raw images
         run: |
+          # Install program to format json output
           sudo apt-get -y install jq
+
+          # Git files changed
+          git diff --name-only refs/heads/master ${{ github.ref }}
+
+          # DVC files changed
           # dvc diff --show-json a_rev b_rev | jq
           # a_rev      Old Git commit to compare (defaults to HEAD)
           # b_rev      New Git commit to compare (defaults to current workspace)
